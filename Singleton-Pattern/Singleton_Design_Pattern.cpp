@@ -1,6 +1,9 @@
-/*The Singleton pattern ensures that only 
-one instance of a class exists and provides a global access point to that instance.
-Key Points to Consider
+/*
+Creational Design Patterns (Responsible for object creation)
+✅ Singleton → Ensures only one instance of a class exists and provides a global access point.
+
+The Singleton pattern ensures that only one instance of a class exists and provides a global access point to that instance.
+Key Points to Consider:
 ✅ Only One Instance → The class should allow only one object to be created.
 ✅ Private Constructor → Prevents instantiation from outside the class.
 ✅ Deleted Copy Constructor & Assignment Operator → Prevents duplication.
