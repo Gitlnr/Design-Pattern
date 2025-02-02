@@ -1,4 +1,7 @@
 /*
+Creational Design Patterns (Responsible for object creation)
+✅ Factory Method → Creates objects without specifying the exact class.
+
 The "Factory" Design Pattern is a creational design pattern used to define an interface for creating objects,
 but allows subclasses or concrete classes to alter the type of objects that will be created. 
 
