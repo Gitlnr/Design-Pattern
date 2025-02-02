@@ -1,0 +1,143 @@
+/*
+The Builder pattern is a creational design pattern. It helps in constructing complex objects step by step which has lot of configurations
+When to use it:
+When an object needs to be created with many possible configurations.
+When the object has a complex constructor with many parameters.
+*/
+
+#include <iostream>
+#include <memory> //Desktop* desktop  then use unique_ptr<Desktop> // new Desktop() then use make_unique<Desktop>() //make_unique C++ 14
+#include <string>
+
+using namespace std;
+
+// Step 1: Create a class for the product (Desktop)
+class Desktop {
+private:
+    // Add all the configurations to Desktop
+    string monitor, keyBoard, mouse, speaker, ram, processor, motherBoard;
+
+public:
+    Desktop() {}
+    
+    // Create setter functions for each configuration
+    void setMonitor(const string& _monitor) { monitor = _monitor; }
+    void setKeyBoard(const string& _keyBoard) { keyBoard = _keyBoard; }
+    void setMouse(const string& _mouse) { mouse = _mouse; }
+    void setSpeaker(const string& _speaker) { speaker = _speaker; }
+    void setRam(const string& _ram) { ram = _ram; }
+    void setProcessor(const string& _processor) { processor = _processor; }
+    void setMotherBoard(const string& _motherBoard) { motherBoard = _motherBoard; }
+
+    // Function to show the output
+    void showSpecs() const {
+        cout << "---------------------------------------------------------\n";
+        cout << "This Monitor is: " << monitor << endl;
+        cout << "This Keyboard is: " << keyBoard << endl;
+        cout << "This Mouse is: " << mouse << endl;
+        cout << "This Speaker is: " << speaker << endl;
+        cout << "This Ram is: " << ram << endl;
+        cout << "This Processor is: " << processor << endl;
+        cout << "This MotherBoard is: " << motherBoard << endl;
+    }
+};
+
+// Step 2: Create an abstract class for DesktopBuilder
+class DesktopBuilder {
+protected:
+    // Use a unique_ptr for automatic memory management
+    unique_ptr<Desktop> desktop; //Desktop* desktop;
+
+public:
+    DesktopBuilder() : desktop(make_unique<Desktop>()) {}  //dekstop = new Desktop()
+
+    virtual void buildDesktopMonitor() = 0;
+    virtual void buildDesktopKeyBoard() = 0;
+    virtual void buildDesktopMouse() = 0;
+    virtual void buildDesktopSpeaker() = 0;
+    virtual void buildDesktopRam() = 0;
+    virtual void buildDesktopProcessor() = 0;
+    virtual void buildDesktopMotherBoard() = 0;
+
+    // Return the constructed Desktop (smart pointer ensures memory is managed)
+    unique_ptr<Desktop> getDesktop() { //Desktop* getDesktop()
+        return move(desktop); //move() used in smart pointer
+    }
+};
+
+// Step 3: Implement concrete builders (DellDesktopBuilder, HpDesktopBuilder)
+class DellDesktopBuilder : public DesktopBuilder {
+public:
+    void buildDesktopMonitor() override { desktop->setMonitor("Dell Monitor"); }
+    void buildDesktopKeyBoard() override { desktop->setKeyBoard("Dell KeyBoard"); }
+    void buildDesktopMouse() override { desktop->setMouse("Dell Mouse"); }
+    void buildDesktopSpeaker() override { desktop->setSpeaker("Dell Speaker"); }
+    void buildDesktopRam() override { desktop->setRam("Dell Ram"); }
+    void buildDesktopProcessor() override { desktop->setProcessor("Dell Processor"); }
+    void buildDesktopMotherBoard() override { desktop->setMotherBoard("Dell MotherBoard"); }
+};
+
+class HpDesktopBuilder : public DesktopBuilder {
+public:
+    void buildDesktopMonitor() override { desktop->setMonitor("HP Monitor"); }
+    void buildDesktopKeyBoard() override { desktop->setKeyBoard("HP KeyBoard"); }
+    void buildDesktopMouse() override { desktop->setMouse("HP Mouse"); }
+    void buildDesktopSpeaker() override { desktop->setSpeaker("HP Speaker"); }
+    void buildDesktopRam() override { desktop->setRam("HP Ram"); }
+    void buildDesktopProcessor() override { desktop->setProcessor("HP Processor"); }
+    void buildDesktopMotherBoard() override { desktop->setMotherBoard("HP MotherBoard"); }
+};
+
+// Step 4: Create a director class
+class DesktopDirector {
+private:
+    unique_ptr<DesktopBuilder> desktopBuilder; //DesktopBuilder* desktopBuilder;
+
+public:
+    // Pass a unique_ptr to DesktopBuilder
+    DesktopDirector(unique_ptr<DesktopBuilder> builder) : desktopBuilder(move(builder)) {}
+
+    unique_ptr<Desktop> buildDesktop() { //Desktop* buildDesktop()
+        desktopBuilder->buildDesktopMonitor();
+        desktopBuilder->buildDesktopKeyBoard();
+        desktopBuilder->buildDesktopMouse();
+        desktopBuilder->buildDesktopSpeaker();
+        desktopBuilder->buildDesktopRam();
+        desktopBuilder->buildDesktopProcessor();
+        desktopBuilder->buildDesktopMotherBoard();
+        return desktopBuilder->getDesktop();
+    }
+};
+
+// Main function to test the code
+int main() {
+/*  HpDesktopBuilder* hpDesktopBuilder = new HpDesktopBuilder();
+    DellDesktopBuilder* dellDesktopBuilder = new DellDesktopBuilder();
+    
+    DesktopDirector* director1= new DesktopDirector(hpDesktopBuilder);
+    DesktopDirector* director2 = new DesktopDirector(dellDesktopBuilder);
+    
+    Desktop* desktop1 = director1->BuildDesktop();
+    Desktop* desktop2 = director2->BuildDesktop();
+    
+    desktop1->showSpecs();
+    desktop2->showSpecs();
+*/
+    // Create a director for HP and Dell desktops using smart pointers
+    unique_ptr<DesktopBuilder> hpBuilder = make_unique<HpDesktopBuilder>();
+    unique_ptr<DesktopBuilder> dellBuilder = make_unique<DellDesktopBuilder>();
+
+    // Create director instances
+    DesktopDirector director1(move(hpBuilder));
+    DesktopDirector director2(move(dellBuilder));
+
+    // Build desktops using the director
+    unique_ptr<Desktop> desktop1 = director1.buildDesktop();
+    unique_ptr<Desktop> desktop2 = director2.buildDesktop();
+
+    // Display the specs of both desktops
+    desktop1->showSpecs();
+    desktop2->showSpecs();
+
+    return 0;
+}
