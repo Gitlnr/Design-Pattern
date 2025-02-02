@@ -1,4 +1,8 @@
-/*Definition:
+/*
+Structural Design Patterns (Deals with class composition & object relationships)
+✅ Adapter → Converts one interface into another that a client expects.
+
+Definition:
 The **Adapter Design Pattern** is a structural pattern that allows incompatible interfaces to work together by acting as a bridge between them. 
 It converts an interface of a class into another interface that clients expect, enabling seamless integration without modifying existing code.
 
