@@ -1,12 +1,11 @@
 /*
-Type:
-Class Adapter
-Implementation:
-Uses multiple inheritance (inherits from both adaptee and target interface)	No need for explicit delegation, 
-Pros:
-simpler implementation	
-Cons:
-Less flexible, cannot wrap multiple adaptees
+Structural Design Patterns (Deals with class composition & object relationships)
+✅ Adapter → Converts one interface into another that a client expects.
+
+Type:Class Adapter
+Implementation:Uses multiple inheritance (inherits from both adaptee and target interface)	No need for explicit delegation, 
+Pros:simpler implementation	
+Cons:Less flexible, cannot wrap multiple adaptees
 */
 
 #include <iostream>
