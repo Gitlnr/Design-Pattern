@@ -6,14 +6,10 @@ Definition:
 The **Adapter Design Pattern** is a structural pattern that allows incompatible interfaces to work together by acting as a bridge between them. 
 It converts an interface of a class into another interface that clients expect, enabling seamless integration without modifying existing code.
 
-Type:		
-Object Adapter	
-Implementation:
-Uses composition (an adapter class has a pointer/reference to the adaptee(XMLData* xmlData))	
-Pros :
-More flexible, can wrap multiple adaptees	
-Cons :
-Requires more delegation
+Type:Object Adapter	
+Implementation:Uses composition (an adapter class has a pointer/reference to the adaptee(XMLData* xmlData))	
+Pros :More flexible, can wrap multiple adaptees	
+Cons :Requires more delegation
 */
 
 #include <iostream>
