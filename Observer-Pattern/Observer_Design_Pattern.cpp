@@ -1,3 +1,6 @@
+/*Behavioral Design Patterns (Focuses on communication between objects)
+✅ Observer → Defines a dependency so that multiple objects get updated when one object changes.
+*/
 #include <iostream>
 #include <list>
 #include <memory>
