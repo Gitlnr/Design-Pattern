@@ -107,7 +107,7 @@ int main() {
     IButton* button = UIFactory::CreateButton(osType);
     ITextBox* textBox = UIFactory::CreateTextBox(osType);
 
-    if (button && textBox) {
+    if (button) {
         button->OnClickEvent();    // Call Button functionality
         delete button; // Clean up dynamically allocated objects
     }
