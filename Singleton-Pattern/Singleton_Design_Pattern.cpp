@@ -99,6 +99,10 @@ int main() {
     thread t1(user1Log);
     thread t2(user2Log);
 
+  // Pass arguments to the thread function
+  //void userLog(int userId, string message)
+  //  thread t1(userLog, id, msg); 
+
     t1.join();
     t2.join();
 
