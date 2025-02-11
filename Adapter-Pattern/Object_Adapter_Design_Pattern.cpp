@@ -3,7 +3,7 @@ Structural Design Patterns (Deals with class composition & object relationships)
 ✅ Adapter → Converts one interface into another that a client expects.
 
 Definition:
-The **Adapter Design Pattern** is a structural pattern that allows incompatible interfaces to work together by acting as a bridge between them. 
+The Adapter Design Pattern is a structural pattern that allows incompatible interfaces to work together by acting as a bridge between them. 
 It converts an interface of a class into another interface that clients expect, enabling seamless integration without modifying existing code.
 
 Type:Object Adapter	
@@ -45,7 +45,7 @@ class DataAnalyticsTool {
 class Adapter : public DataAnalyticsTool {
     // Adapter converts XML data to JSON format
   private:
-    shared_ptr<XMLData> xmlData; //XMLData* xmlData;
+    shared_ptr<XMLData> xmlData; //XMLData* xmlData; //Multiple owners so am gonna use shared_ptr (shared ownership).
   public: 
     Adapter(shared_ptr<XMLData> pxmlData) 
         : DataAnalyticsTool("Converted JSON Data"), xmlData(pxmlData) {}
