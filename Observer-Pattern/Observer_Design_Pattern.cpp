@@ -37,6 +37,9 @@ public:
 class Group {
 private:
     list<shared_ptr<ISubscribe>> users; // List of subscribers
+    //Flexibility (Supports multiple subscriber types)
+    //Polymorphism (Works with all ISubscribe implementations)
+   //If you're 100% sure only User objects will subscribe, then list<shared_ptr<User>> is fine. But for scalability and clean design, list<shared_ptr<ISubscribe>> is the best choice. 
 
 public:
     void SubscribeUser(shared_ptr<ISubscribe> user) { //ISubscriber* user
